@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27004.2002
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HW1", "HW1\HW1.csproj", "{28D380B1-9F8E-41CB-9573-D0D491851086}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HW2", "HW1\HW2.csproj", "{28D380B1-9F8E-41CB-9573-D0D491851086}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
