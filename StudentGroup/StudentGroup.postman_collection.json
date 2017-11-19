@@ -1,0 +1,146 @@
+{
+	"info": {
+		"name": "StudentGroup",
+		"_postman_id": "3ba3e0d6-e28e-cacc-df6e-a09c55bbee1b",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "http://localhost:5000/Group/GetStudents",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://localhost:5000/Group/GetStudents",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"Group",
+						"GetStudents"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:5000/Group/AddStudent",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"firstName\": \"Ivan\",\n    \"lastName\": \"Ivanov\",\n    \"age\": 21,\n    \"studentCardNumber\": 12345678,\n    \"emailAddress\": \"ivanIvanov@gmail.com\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:5000/Group/AddStudent",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"Group",
+						"AddStudent"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:5000/Group/12345678/did/firstHomeWork",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://localhost:5000/Group/12345678/did/firstHomeWork",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"Group",
+						"12345678",
+						"did",
+						"firstHomeWork"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:5000/Group/UpdateStudetn?cardNum=12345678",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"firstName\": \"Ivan\",\n    \"lastName\": \"Ivanov\",\n    \"age\": 21,\n    \"studentCardNumber\": 10000000,\n    \"emailAddress\": \"ivanIvanov@gmail.com\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:5000/Group/UpdateStudent?cardNum=12345678",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"Group",
+						"UpdateStudent"
+					],
+					"query": [
+						{
+							"key": "cardNum",
+							"value": "12345678",
+							"equals": true
+						}
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:5000/Group/12345678/delete",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://localhost:5000/Group/12345678/delete",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"Group",
+						"12345678",
+						"delete"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}
