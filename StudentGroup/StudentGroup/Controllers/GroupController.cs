@@ -7,6 +7,7 @@ namespace StudentGroup.Controllers
     [Route("[controller]")]
     public class GroupController : Controller
     {
+        [HttpPost]
         [Route("[Action]")]
         public StudentModel AddStudent([FromBody]StudentModel student)
         {
@@ -14,6 +15,7 @@ namespace StudentGroup.Controllers
             return student;
         }
 
+        [HttpPut]
         [Route("[Action]")]
         public StudentModel UpdateStudent([FromQuery]int cardNum, [FromBody]StudentModel student)
         {
@@ -40,18 +42,21 @@ namespace StudentGroup.Controllers
             return currentStudentModel;
         }
 
+        [HttpGet]
         [Route("[Action]")]
         public List<StudentModel> GetStudents()
         {
             return GroupModel.GetStudents();
         }
 
+        [HttpDelete]
         [Route("{cardNum}/delete")]
         public void DeleteStudentByCardNum(int cardNum)
         {
             GroupModel.DeleteStudentByCardNum(cardNum);
         }
 
+        [HttpPost]
         [Route("{cardNum}/did/{homeWork}")]
         public StudentModel AddDoneHomeWork(int cardNum, string homeWork)
         {
