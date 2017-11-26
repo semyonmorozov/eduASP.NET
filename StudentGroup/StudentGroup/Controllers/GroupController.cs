@@ -9,15 +9,16 @@ namespace StudentGroup.Controllers
     {
         [HttpPost]
         [Route("[Action]")]
-        public StudentModel AddStudent([FromBody]StudentModel student)
+        public IActionResult AddStudent([FromBody]StudentModel student)
         {
+            if (!ModelState.IsValid) return BadRequest(student);
             GroupModel.AddStudent(student);
-            return student;
+            return Json(student);
         }
 
         [HttpPut]
         [Route("[Action]")]
-        public StudentModel UpdateStudent([FromQuery]int cardNum, [FromBody]StudentModel student)
+        public IActionResult UpdateStudent([FromQuery]int cardNum, [FromBody]StudentModel student)
         {
             var currentStudentModel = GroupModel.GetStudentByCardNum(cardNum);
 
@@ -39,14 +40,14 @@ namespace StudentGroup.Controllers
             if (student.Age != 0)
                 currentStudentModel.Age = student.Age;
 
-            return currentStudentModel;
+            return Json(currentStudentModel);
         }
 
         [HttpGet]
         [Route("[Action]")]
-        public List<StudentModel> GetStudents()
+        public IActionResult GetStudents()
         {
-            return GroupModel.GetStudents();
+            return Json(GroupModel.GetStudents());
         }
 
         [HttpDelete]
@@ -58,10 +59,10 @@ namespace StudentGroup.Controllers
 
         [HttpPost]
         [Route("{cardNum}/did/{homeWork}")]
-        public StudentModel AddDoneHomeWork(int cardNum, string homeWork)
+        public IActionResult AddDoneHomeWork(int cardNum, string homeWork)
         {
             var student = GroupModel.GetStudentByCardNum(cardNum);
-            return student.AddDoneHomeWork(homeWork);
+            return Json(student.AddDoneHomeWork(homeWork));
         }
     }
     
