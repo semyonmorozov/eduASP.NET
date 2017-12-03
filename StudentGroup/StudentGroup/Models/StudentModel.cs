@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace StudentGroup.Models
@@ -14,27 +15,16 @@ namespace StudentGroup.Models
         [MaxLength(15)]
         public string LastName { get; set; }
 
-        [Required(ErrorMessage = "Age required")]
-        [Range(18, 65)]
-        public int Age { get; set; }
-
         [Required(ErrorMessage = "Student card number required")]
-        [Range(10000000, 99999999)]
+        [Range(10000000, 99999999, ErrorMessage = "Student card number must be eight digits")]
         public int StudentCardNumber { get; set; }
 
         [Required(ErrorMessage = "Email address required")]
         [EmailAddress]
         public string EmailAddress { get; set; }
 
-        public List<string> DoneHomeWorks = new List<string>();
-
-        public StudentModel AddDoneHomeWork(string homeWork)
-        {
-            DoneHomeWorks.Add(homeWork);
-            return this;
-        }
-
-
+        public Dictionary<HomeWorkModel,int> DoneHomeWorks = new Dictionary<HomeWorkModel, int>();
+        
     }
-
+    
 }

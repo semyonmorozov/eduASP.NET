@@ -1,68 +1,81 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 using StudentGroup.Models;
 
 namespace StudentGroup.Controllers
 {
-    [Route("[controller]")]
+
     public class GroupController : Controller
     {
+        public IActionResult AddStudent()
+        {
+            return View();
+        }
+
         [HttpPost]
-        [Route("[Action]")]
-        public IActionResult AddStudent([FromBody]StudentModel student)
+        public IActionResult AddStudent(StudentModel student)
         {
-            if (!ModelState.IsValid) return BadRequest(student);
+            if (!ModelState.IsValid) return RedirectToAction("AddStudent", "Group");
+            foreach (var homeWork in GroupModel.HomeWorks)
+            {
+                student.DoneHomeWorks.Add(homeWork,0);
+            }
             GroupModel.AddStudent(student);
-            return Json(student);
+            return RedirectToAction("GetStudents", "Group");
         }
-
-        [HttpPut]
-        [Route("[Action]")]
-        public IActionResult UpdateStudent([FromQuery]int cardNum, [FromBody]StudentModel student)
-        {
-            var currentStudentModel = GroupModel.GetStudentByCardNum(cardNum);
-
-            if (student.FirstName != null)
-                currentStudentModel.FirstName = student.FirstName;
-
-            if (student.LastName != null)
-                currentStudentModel.LastName = student.LastName;
-
-            if (student.DoneHomeWorks.Count != 0)
-                currentStudentModel.DoneHomeWorks = student.DoneHomeWorks;
-
-            if (student.EmailAddress != null)
-                currentStudentModel.EmailAddress = student.EmailAddress;
-
-            if (student.StudentCardNumber != 0)
-                currentStudentModel.StudentCardNumber = student.StudentCardNumber;
-
-            if (student.Age != 0)
-                currentStudentModel.Age = student.Age;
-
-            return Json(currentStudentModel);
-        }
-
-        [HttpGet]
-        [Route("[Action]")]
+        
         public IActionResult GetStudents()
         {
-            return Json(GroupModel.GetStudents());
+            return View(GroupModel.GetStudents());
         }
-
-        [HttpDelete]
-        [Route("{cardNum}/delete")]
-        public void DeleteStudentByCardNum(int cardNum)
+        
+        [Route("{cardNum}")]
+        public IActionResult GetStudent(int cardNum)
         {
-            GroupModel.DeleteStudentByCardNum(cardNum);
+            var student = GroupModel.GetStudentByCardNum(cardNum);
+            return View(student);
+        }
+        
+        [Route("{cardNum}/Edit")]
+        public IActionResult EditStudent(int cardNum)
+        {
+            var student = GroupModel.GetStudentByCardNum(cardNum);
+            return View(student);
         }
 
         [HttpPost]
-        [Route("{cardNum}/did/{homeWork}")]
-        public IActionResult AddDoneHomeWork(int cardNum, string homeWork)
+        [Route("{cardNum}/Edit")]
+        public IActionResult EditStudent(StudentModel student, int cardNum)
+        {
+            var currentStudentModel = GroupModel.GetStudentByCardNum(cardNum);
+            currentStudentModel.StudentCardNumber = student.StudentCardNumber;
+            currentStudentModel.FirstName = student.FirstName;
+            currentStudentModel.LastName = student.LastName;
+            currentStudentModel.EmailAddress = student.EmailAddress;
+            return RedirectToAction("GetStudents", "Group");
+        }
+        
+        [Route("{cardNum}/delete")]
+        public IActionResult DeleteStudentByCardNum(int cardNum)
+        {
+            GroupModel.DeleteStudentByCardNum(cardNum);
+            return RedirectToAction("GetStudents", "Group");
+        }
+        
+        [Route("{cardNum}/homeworks")]
+        public IActionResult GetDoneHomeWorks(int cardNum)
         {
             var student = GroupModel.GetStudentByCardNum(cardNum);
-            return Json(student.AddDoneHomeWork(homeWork));
+            return View(student);
+        }
+
+        [HttpPost]
+        public IActionResult EditHomeWorks(int cardNum,Dictionary<HomeWorkModel,int>homeWorks)
+        {
+            var student = GroupModel.GetStudentByCardNum(cardNum);
+            student.DoneHomeWorks = homeWorks;
+            return RedirectToRoute(cardNum + "/homeworks");
         }
     }
     

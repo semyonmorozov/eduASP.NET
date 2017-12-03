@@ -1,0 +1,33 @@
+﻿@model StudentModel
+<div style="margin-top: 20px;">
+    <dl>
+        <dt>@Html.DisplayNameFor(m => m.StudentCardNumber)</dt>
+        <dd>@Html.DisplayFor(m => m.StudentCardNumber)</dd>
+
+        <dt>@Html.DisplayNameFor(m => m.FirstName)</dt>
+        <dd>@Html.DisplayFor(m => m.FirstName)</dd>
+
+        <dt>@Html.DisplayNameFor(m => m.LastName)</dt>
+        <dd>@Html.DisplayFor(m => m.LastName)</dd>
+
+        <dt>@Html.DisplayNameFor(m => m.EmailAddress)</dt>
+        <dd>@Html.DisplayFor(m => m.EmailAddress)</dd>
+    </dl>
+    <a class="btn btn-primary" href="@Model.StudentCardNumber/Edit">Edit</a>
+</div>
+
+<style>
+    dl {
+        margin-bottom: 10px;
+    }
+
+    dt {
+        display: inline-block;
+        width: 30%;
+    }
+
+    dd {
+        display: inline-block;
+        width: 60%;
+    }
+</style>

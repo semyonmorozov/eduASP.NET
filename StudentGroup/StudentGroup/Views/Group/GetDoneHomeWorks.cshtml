@@ -1,0 +1,26 @@
+﻿@model StudentModel
+    
+<div style="margin-top: 20px;">
+    
+    <h1>@Html.DisplayFor(m => m.FirstName) @Html.DisplayFor(m => m.LastName)</h1>
+    
+    <table class="table">
+        <thead>
+        <tr>
+            <th>HomeWork</th>
+            <th>DeadLine</th>
+            <th>Mark</th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var homework in Model.DoneHomeWorks)
+        {
+            <tr>
+                <td>@homework.Key.Title</td>
+                <td>@homework.Key.DeadLine.ToShortDateString()</td>
+                <td>@homework.Value</td>
+            </tr>
+        }
+        </tbody>
+    </table>
+</div>

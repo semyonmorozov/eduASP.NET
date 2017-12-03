@@ -1,0 +1,27 @@
+﻿@model List<StudentModel>
+    
+<h1>Student Group</h1>
+        
+<div class="row">
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Points</th>
+            </tr>
+            </thead>
+            <tbody>
+            @foreach (var student in Model)
+            {
+                <tr>
+                    <td><a href="@student.StudentCardNumber">@student.FirstName @student.LastName</a></td>
+                    <td>@student.EmailAddress</td>
+                    <td><a class="btn btn-primary" href="@student.StudentCardNumber/homeworks">@student.DoneHomeWorks.Sum(x=>x.Value)</a></td>
+                </tr>
+            }
+            </tbody>
+        </table>
+        <a class="btn btn-primary" href="@Url.Action("AddStudent", "Group")">Add Student</a>
+</div>
+
