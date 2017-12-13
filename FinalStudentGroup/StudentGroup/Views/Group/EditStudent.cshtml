@@ -1,0 +1,35 @@
+﻿@model StudentModel
+
+<div style="margin-top: 20px;">
+    @using (Html.BeginForm("EditStudent", "Group", FormMethod.Post))
+    {
+        <div>
+            <div>@Html.DisplayNameFor(m => m.StudentCardNumber)</div>
+            <div>@Html.EditorFor(m => m.StudentCardNumber)</div>
+            <div>@Html.ValidationMessageFor(m => m.StudentCardNumber)</div>
+        </div>
+        <div>
+            <div>@Html.DisplayNameFor(m => m.FirstName)</div>
+            <div>@Html.EditorFor(m => m.FirstName)</div>
+            <div>@Html.ValidationMessageFor(m => m.FirstName)</div>
+        </div>
+
+        <div>
+            <div>@Html.DisplayNameFor(m => m.LastName)</div>
+            <div>@Html.EditorFor(m => m.LastName)</div>
+            <div>@Html.ValidationMessageFor(m => m.LastName)</div>
+        </div>
+        <div>
+            <div>@Html.DisplayNameFor(m => m.EmailAddress)</div>
+            <div>@Html.EditorFor(m => m.EmailAddress)</div>
+            <div>@Html.ValidationMessageFor(m => m.EmailAddress)</div>
+        </div>
+
+        <div style="margin-top: 10px;">
+            <button class="btn btn-primary" type="submit">Save</button>
+        </div>
+    }
+    <div style="margin-top: 20px;">
+        <a class="btn btn-danger" href="delete">Delete Student</a>
+    </div>
+</div>
